@@ -44,3 +44,13 @@ The frontend interacts with the following backend API endpoints:
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Testing
+
+To ensure the application works as expected, you can run tests. Follow these steps:
+
+### **Run the tests**:
+
+```bash
+npm test:unit
+```
