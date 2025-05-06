@@ -2,17 +2,21 @@
   <div id="app">
     <h1 class="app-title">Todo App</h1>
     <CustomInput v-model="newTodo" @add="addTodo" />
-    <!-- <div v-for="(todo, index) in todos" :key="index">
-      {{ todo }}
-    </div> -->
+    <CustomTodoList
+      :todos="this.todos"
+      @toggleComplete="toggleComplete"
+      @deleteTodo="removeTodo"
+    />
   </div>
 </template>
 
 <script>
+import { getTodos, addTodo, toggleTodo, deleteTodo } from "@/services/api.js";
 import CustomInput from "./components/CustomInput.vue";
+import CustomTodoList from "./components/CustomTodoList.vue";
 export default {
   name: "App",
-  components: { CustomInput },
+  components: { CustomInput, CustomTodoList },
   data() {
     return {
       newTodo: "",
@@ -20,12 +24,50 @@ export default {
     };
   },
   methods: {
-    addTodo() {
-      if (this.newTodo.trim()) {
-        this.todos.push(this.newTodo);
-        this.newTodo = "";
+    async fetchTodos() {
+      try {
+        const response = await getTodos();
+        this.todos = response.data;
+      } catch (error) {
+        console.error("Error fetching todos:", error);
       }
     },
+    async addTodo() {
+      if (this.newTodo.trim()) {
+        try {
+          const response = await addTodo({ title: this.newTodo });
+          this.todos.push(response.data);
+          this.newTodo = "";
+        } catch (error) {
+          console.error("Error adding todo:", error);
+        }
+      }
+    },
+    async toggleComplete(todoId) {
+      const todo = this.todos.find((todo) => todo._id === todoId);
+      try {
+        const response = await toggleTodo(todoId, !todo.completed);
+        this.todos = this.todos.map((todo) =>
+          todo._id === todoId
+            ? { ...todo, completed: response.data.completed }
+            : todo
+        );
+      } catch (error) {
+        console.error("Error toggling todo:", error);
+      }
+    },
+    async removeTodo(todoId) {
+      console.log("Deleting todo with ID:", todoId);
+      try {
+        await deleteTodo(todoId);
+        this.todos = this.todos.filter((todo) => todo._id !== todoId);
+      } catch (error) {
+        console.error("Error deleting todo:", error);
+      }
+    },
+  },
+  async mounted() {
+    await this.fetchTodos();
   },
 };
 </script>
