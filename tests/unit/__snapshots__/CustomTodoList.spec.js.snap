@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomTodoList matches snapshot 1`] = `
+<div class="todo-list">
+  <div class="todo-item"><span class="todo-text">
+      First todo
+    </span> <button class="delete-button">
+      Delete
+    </button></div>
+  <div class="todo-item completed"><span class="todo-text completed">
+      Second todo
+    </span> <button class="delete-button">
+      Delete
+    </button></div>
+</div>
+`;

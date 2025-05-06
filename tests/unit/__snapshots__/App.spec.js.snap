@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App.vue matches snapshot 1`] = `
+<div id="app">
+  <h1 class="app-title">Todo App</h1>
+  <div class="add-todo-container"><input placeholder="Add a new todo" class="todo-input"> <button class="add-todo-button">Add</button></div>
+  <div class="todo-list">
+    <div class="todo-item"><span class="todo-text">
+      Test Todo 1
+    </span> <button class="delete-button">
+        Delete
+      </button></div>
+    <div class="todo-item completed"><span class="todo-text completed">
+      Test Todo 2
+    </span> <button class="delete-button">
+        Delete
+      </button></div>
+    <div class="todo-item"><span class="todo-text">
+      New Test Todo
+    </span> <button class="delete-button">
+        Delete
+      </button></div>
+  </div>
+</div>
+`;
