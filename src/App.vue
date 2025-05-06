@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1 class="app-title">Todo App</h1>
+    <CustomInput />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import CustomInput from "./components/CustomInput.vue";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { CustomInput },
+  data() {
+    return {
+      newTodo: "",
+      todos: [],
+    };
+  },
+};
 </script>
 
 <style>
@@ -22,7 +25,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background: linear-gradient(130deg, #6a11cb, #2575fc);
+  color: #fefefe;
+}
+.app-title {
+  color: #ffffffcc;
+  text-shadow: 2px 2px 2px #0008;
 }
 </style>
