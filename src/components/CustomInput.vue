@@ -1,17 +1,23 @@
 <template>
   <div class="add-todo-container">
-    <input class="todo-input" v-model="newTodo" placeholder="Add a new todo" />
-    <button class="add-todo-button" @click="addTodo">Add</button>
+    <input
+      class="todo-input"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+      placeholder="Add a new todo"
+    />
+    <button class="add-todo-button" @click="$emit('add')">Add</button>
   </div>
 </template>
+
 <script>
 export default {
   name: "CustomInput",
-  data() {
-    return {
-      newTodo: "",
-      todos: [],
-    };
+  props: {
+    value: {
+      type: String,
+      default: "",
+    },
   },
 };
 </script>
