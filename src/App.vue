@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <h1 class="app-title">Todo App</h1>
-    <CustomInput />
+    <CustomInput v-model="newTodo" @add="addTodo" />
+    <!-- <div v-for="(todo, index) in todos" :key="index">
+      {{ todo }}
+    </div> -->
   </div>
 </template>
 
@@ -16,9 +19,16 @@ export default {
       todos: [],
     };
   },
+  methods: {
+    addTodo() {
+      if (this.newTodo.trim()) {
+        this.todos.push(this.newTodo);
+        this.newTodo = "";
+      }
+    },
+  },
 };
 </script>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
